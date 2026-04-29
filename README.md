@@ -1,15 +1,15 @@
-# TaskFlow
+# TaskFlow (Modern Kanban Workspace)
 
-TaskFlow is a full-stack task management system built with Next.js App Router, TypeScript, MongoDB, Mongoose, JWT cookie authentication, Tailwind CSS, and ShadCN-style UI primitives.
+TaskFlow is a premium, full-stack Kanban task management system built with Next.js App Router, TypeScript, MongoDB, Mongoose, JWT cookie authentication, Tailwind CSS, and ShadCN-style UI primitives. It features a vibrant dark-mode glassmorphic aesthetic and a seamless drag-and-drop experience.
 
 ## Features
 
-- User signup, login, logout, and session restoration
-- HTTP-only JWT cookie authentication
-- Protected dashboard route guard using Next.js `proxy.ts`
-- Create, edit, delete, search, filter, and complete tasks
-- Priority badges, due dates, loading skeletons, empty states, and toast feedback
-- Responsive SaaS-style UI for mobile, tablet, and desktop
+- **Modern Authentication**: User signup, login, logout, and session restoration using HTTP-only JWT cookies.
+- **Kanban Board**: Fully interactive drag-and-drop interface across 4 columns (Backlog, In Progress, Review, Done).
+- **Task Management**: Create, edit, and reorganize tasks instantly. Tasks support priority flags, due dates, and specific project labels.
+- **Dynamic User Profile**: Update your full name and password seamlessly through a beautifully styled Dropdown Menu and Dialog interface.
+- **Premium UI**: Vibrant, deep-dark glassmorphic design featuring ambient background gradients, hover elevations, micro-animations, loading skeletons, and toast feedback.
+- **Route Protection**: Protected dashboard route guard using Next.js `middleware.ts`.
 
 ## Tech Stack
 
@@ -20,6 +20,8 @@ TaskFlow is a full-stack task management system built with Next.js App Router, T
 - `bcryptjs` for password hashing
 - Tailwind CSS v4
 - React Hook Form + Zod
+- `@hello-pangea/dnd` for fluid drag-and-drop
+- Radix UI & Shadcn UI Primitives
 - Sonner toasts
 
 ## Folder Structure
@@ -35,6 +37,8 @@ app/
       logout/route.ts
       me/route.ts
       signup/route.ts
+    profile/
+      route.ts
     tasks/
       [taskId]/route.ts
       route.ts
@@ -48,27 +52,25 @@ components/
   auth/
     auth-form.tsx
   tasks/
+    profile-form-dialog.tsx
     task-dashboard.tsx
     task-form-dialog.tsx
   ui/
-    avatar.tsx
-    badge.tsx
     button.tsx
-    card.tsx
     dialog.tsx
+    dropdown-menu.tsx
     input.tsx
     label.tsx
-    separator.tsx
     skeleton.tsx
     textarea.tsx
 hooks/
   use-debounced-value.ts
 lib/
   api.ts
-  auth.ts
+  auth/
+    session.ts
   constants.ts
   db.ts
-  env.ts
   serializers.ts
   types.ts
   utils.ts
@@ -78,87 +80,64 @@ lib/
 models/
   Task.ts
   User.ts
-proxy.ts
+middleware.ts
 ```
 
 ## Environment Variables
 
-Create a `.env.local` file in the project root:
+Create a `.env` file in the project root:
 
 ```bash
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_long_random_secret
 ```
 
-Guidance:
-
-- `MONGODB_URI`: MongoDB Atlas or self-hosted connection string
-- `JWT_SECRET`: a long, random string used to sign auth tokens
-
-You can copy from `.env.example` as a starting point.
+- `MONGODB_URI`: MongoDB connection string
+- `JWT_SECRET`: A long, random string used to sign auth tokens
 
 ## Setup Instructions
 
 1. Install dependencies:
-
 ```bash
 npm install
 ```
 
-2. Create `.env.local` with your MongoDB URI and JWT secret.
-
-3. Start the development server:
-
+2. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000).
+3. Open [http://localhost:3000](http://localhost:3000).
 
 ## API Overview
 
-### Auth routes
-
+### Auth & Profile Routes
 - `POST /api/auth/signup`
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
+- `PATCH /api/profile` (Update name and password)
 
-### Task routes
-
-- `GET /api/tasks?status=all|pending|completed&q=search`
+### Task Routes
+- `GET /api/tasks?status=all|backlog|in-progress|review|done&q=search`
 - `POST /api/tasks`
 - `PATCH /api/tasks/[taskId]`
 - `DELETE /api/tasks/[taskId]`
 
 ## Key Architecture Notes
 
-### Authentication
+### Authentication & Profile
+- Passwords are hashed with `bcryptjs`.
+- JWT tokens are signed with `jose` and stored in an HTTP-only cookie.
+- Route access is guarded in `middleware.ts`.
 
-- Passwords are hashed with `bcryptjs` before storage.
-- JWT tokens are signed with `jose`.
-- Tokens are stored in an HTTP-only cookie for better security.
-- Route access is guarded in `proxy.ts`, which is the Next.js 16 replacement for the old middleware convention.
-
-### Data models
-
-- `models/User.ts` stores user identity and hashed password.
-- `models/Task.ts` stores user-linked task records including priority, due date, completion state, and order.
+### Data Models
+- `models/User.ts`: Stores user identity and hashed password.
+- `models/Task.ts`: Stores user-linked task records including column status, priority, label, due date, completion state, and drag-and-drop position order.
 
 ### Validation
-
 - Client forms use React Hook Form with Zod resolvers.
 - Route handlers re-validate all incoming payloads on the server.
 
-### Database connection
-
+### Database Connection
 - `lib/db.ts` reuses a cached Mongoose connection to avoid duplicate connections during development.
-
-## Verification
-
-The project has been verified with:
-
-```bash
-npm run lint
-npm run build
-```
