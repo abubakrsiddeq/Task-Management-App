@@ -7,11 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
-      <header className="border-b border-zinc-200/80 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80">
+    <div className="min-h-screen">
+      <header className="border-b border-white/10 bg-slate-950/55 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-indigo-500">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-300">
               TaskFlow
             </p>
           </div>
@@ -33,10 +33,10 @@ export default function Home() {
               Modern SaaS task operations
             </Badge>
             <div className="space-y-6">
-              <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+              <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-slate-50">
                 Manage tasks, deadlines, and momentum from one secure dashboard.
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+              <p className="max-w-2xl text-lg leading-8 text-slate-400">
                 TaskFlow pairs a focused UX with full-stack authentication, filtering, and
                 task tracking so your daily workflow feels fast and intentional.
               </p>
@@ -61,7 +61,7 @@ export default function Home() {
             </div>
           </div>
 
-          <Card className="overflow-hidden border-zinc-200/80 bg-white/95 shadow-2xl shadow-zinc-950/5 dark:border-zinc-800 dark:bg-zinc-950/95">
+          <Card className="overflow-hidden border-white/10 bg-slate-950/75 shadow-[0_30px_90px_-46px_rgba(2,6,23,1)]">
             <CardHeader>
               <CardTitle>Dashboard preview</CardTitle>
               <CardDescription>
@@ -88,11 +88,11 @@ export default function Home() {
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="flex items-center justify-between rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-4 dark:border-zinc-800 dark:bg-zinc-900/70"
+                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-4"
                 >
                   <div>
-                    <p className="font-medium text-zinc-950 dark:text-zinc-50">{item.title}</p>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    <p className="font-medium text-slate-100">{item.title}</p>
+                    <p className="text-sm text-slate-400">
                       {item.priority} priority
                     </p>
                   </div>
@@ -135,8 +135,8 @@ function FeaturePill({
   text: string;
 }) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-      <Icon className="h-4 w-4 text-indigo-500" />
+    <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-slate-300">
+      <Icon className="h-4 w-4 text-slate-200" />
       <span>{text}</span>
     </div>
   );
@@ -154,8 +154,8 @@ function FeatureCard({
   return (
     <Card>
       <CardHeader>
-        <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 dark:bg-zinc-900">
-          <Icon className="h-5 w-5 text-indigo-500" />
+        <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/70">
+          <Icon className="h-5 w-5 text-slate-200" />
         </div>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>

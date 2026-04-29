@@ -22,5 +22,20 @@ export function isOverdue(date?: string | Date | null) {
     return false;
   }
 
-  return new Date(date).getTime() < Date.now();
+  const dueDate = new Date(date);
+  const today = new Date();
+
+  dueDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  return dueDate.getTime() < today.getTime();
+}
+
+export function getInitials(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
 }

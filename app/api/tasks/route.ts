@@ -53,8 +53,7 @@ export async function GET(request: NextRequest) {
     }
 
     const tasks = await Task.find(query).sort({
-      completed: 1,
-      dueDate: 1,
+      order: 1,
       createdAt: -1,
     });
 
@@ -84,13 +83,17 @@ export async function POST(request: NextRequest) {
     await connectToDatabase();
 
     const dueDate = parsed.data.dueDate?.trim() ? new Date(`${parsed.data.dueDate}T00:00:00.000Z`) : null;
+    const completed = parsed.data.status === "done" ? true : (parsed.data.completed ?? false);
 
     const task = await Task.create({
       userId: user.userId,
       title: parsed.data.title,
       description: parsed.data.description || "",
       priority: parsed.data.priority,
-      completed: parsed.data.completed ?? false,
+      completed,
+      status: parsed.data.status,
+      label: parsed.data.label,
+      assignee: parsed.data.assignee,
       dueDate,
       order: parsed.data.order ?? Date.now(),
     });

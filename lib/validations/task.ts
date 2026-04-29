@@ -1,8 +1,29 @@
 import { z } from "zod";
 
-import { TASK_PRIORITIES, TASK_STATUS_FILTERS } from "@/lib/constants";
+import {
+  TASK_ASSIGNEE_OPTIONS,
+  TASK_BOARD_COLUMNS,
+  TASK_LABEL_OPTIONS,
+  TASK_PRIORITIES,
+  TASK_STATUS_FILTERS,
+} from "@/lib/constants";
 
-export const taskSchema = z.object({
+const taskBoardStatuses = TASK_BOARD_COLUMNS.map((column) => column.id) as [
+  (typeof TASK_BOARD_COLUMNS)[number]["id"],
+  ...(typeof TASK_BOARD_COLUMNS)[number]["id"][],
+];
+
+const taskLabels = TASK_LABEL_OPTIONS.map((option) => option.id) as [
+  (typeof TASK_LABEL_OPTIONS)[number]["id"],
+  ...(typeof TASK_LABEL_OPTIONS)[number]["id"][],
+];
+
+const taskAssignees = TASK_ASSIGNEE_OPTIONS.map((option) => option.id) as [
+  (typeof TASK_ASSIGNEE_OPTIONS)[number]["id"],
+  ...(typeof TASK_ASSIGNEE_OPTIONS)[number]["id"][],
+];
+
+const taskBaseSchema = z.object({
   title: z
     .string()
     .trim()
@@ -15,15 +36,19 @@ export const taskSchema = z.object({
     .optional()
     .or(z.literal("")),
   priority: z.enum(TASK_PRIORITIES),
+  status: z.enum(taskBoardStatuses),
+  label: z.enum(taskLabels),
+  assignee: z.enum(taskAssignees),
   dueDate: z.string().optional().or(z.literal("")),
   completed: z.boolean().optional(),
   order: z.number().int().optional(),
 });
 
-export const updateTaskSchema = taskSchema.partial().refine(
-  (value) => Object.keys(value).length > 0,
-  "Provide at least one field to update.",
-);
+export const taskSchema = taskBaseSchema;
+
+export const updateTaskSchema = taskBaseSchema
+  .partial()
+  .refine((value) => Object.keys(value).length > 0, "Provide at least one field to update.");
 
 export const taskQuerySchema = z.object({
   status: z.enum(TASK_STATUS_FILTERS).optional().default("all"),

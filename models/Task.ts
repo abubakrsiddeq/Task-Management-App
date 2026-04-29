@@ -1,6 +1,9 @@
 import { Model, Schema, model, models, type Types } from "mongoose";
 
 export type TaskPriority = "low" | "medium" | "high";
+export type TaskStatus = "backlog" | "in-progress" | "review" | "done";
+export type TaskLabel = "email-campaign" | "blog" | "website" | "social-media" | "design" | "product";
+export type TaskAssignee = "owner";
 
 export type TaskDocument = {
   _id: string;
@@ -9,6 +12,9 @@ export type TaskDocument = {
   description?: string;
   completed: boolean;
   priority: TaskPriority;
+  status: TaskStatus;
+  label: TaskLabel;
+  assignee: TaskAssignee;
   dueDate?: Date | null;
   order: number;
   createdAt: Date;
@@ -41,6 +47,21 @@ const taskSchema = new Schema<TaskDocument>(
       type: String,
       enum: ["low", "medium", "high"],
       default: "medium",
+    },
+    status: {
+      type: String,
+      enum: ["backlog", "in-progress", "review", "done"],
+      default: "backlog",
+    },
+    label: {
+      type: String,
+      enum: ["email-campaign", "blog", "website", "social-media", "design", "product"],
+      default: "product",
+    },
+    assignee: {
+      type: String,
+      enum: ["owner"],
+      default: "owner",
     },
     dueDate: {
       type: Date,

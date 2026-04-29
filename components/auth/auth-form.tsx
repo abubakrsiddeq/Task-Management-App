@@ -71,7 +71,7 @@ function LoginForm() {
   }
 
   return (
-    <Card className="w-full max-w-md border-zinc-200/80 bg-white/95 shadow-xl shadow-zinc-950/5 backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-950/90">
+    <Card className="w-full max-w-md border-white/10 bg-slate-950/70 shadow-[0_30px_80px_-40px_rgba(2,6,23,1)] backdrop-blur-xl">
       <CardHeader className="space-y-3">
         <CardTitle>Welcome back</CardTitle>
         <CardDescription>
@@ -83,16 +83,16 @@ function LoginForm() {
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="name@company.com" {...form.register("email")} />
-            <p className="text-xs text-red-500">{form.formState.errors.email?.message}</p>
+            <p className="text-xs text-rose-300">{form.formState.errors.email?.message}</p>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" placeholder="At least 8 characters" {...form.register("password")} />
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs text-slate-400">
               Minimum 8 characters for a smoother, more secure sign-in.
             </p>
-            <p className="text-xs text-red-500">{form.formState.errors.password?.message}</p>
+            <p className="text-xs text-rose-300">{form.formState.errors.password?.message}</p>
           </div>
 
           <Button className="w-full" disabled={isSubmitting} type="submit">
@@ -101,9 +101,9 @@ function LoginForm() {
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="mt-6 text-center text-sm text-slate-400">
           Need an account?{" "}
-          <Link className="font-medium text-zinc-950 hover:underline dark:text-zinc-50" href="/signup">
+          <Link className="font-medium text-slate-100 hover:text-white hover:underline" href="/signup">
             Create one
           </Link>
         </p>
@@ -153,7 +153,7 @@ function SignupForm() {
   }
 
   return (
-    <Card className="w-full max-w-md border-zinc-200/80 bg-white/95 shadow-xl shadow-zinc-950/5 backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-950/90">
+    <Card className="w-full max-w-md border-white/10 bg-slate-950/70 shadow-[0_30px_80px_-40px_rgba(2,6,23,1)] backdrop-blur-xl">
       <CardHeader className="space-y-3">
         <CardTitle>Create your account</CardTitle>
         <CardDescription>
@@ -165,22 +165,22 @@ function SignupForm() {
           <div className="space-y-2">
             <Label htmlFor="name">Full name</Label>
             <Input id="name" placeholder="Ava Johnson" {...form.register("name")} />
-            <p className="text-xs text-red-500">{form.formState.errors.name?.message}</p>
+            <p className="text-xs text-rose-300">{form.formState.errors.name?.message}</p>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="name@company.com" {...form.register("email")} />
-            <p className="text-xs text-red-500">{form.formState.errors.email?.message}</p>
+            <p className="text-xs text-rose-300">{form.formState.errors.email?.message}</p>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" placeholder="At least 8 characters" {...form.register("password")} />
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs text-slate-400">
               Minimum 8 characters for a smoother, more secure sign-in.
             </p>
-            <p className="text-xs text-red-500">{form.formState.errors.password?.message}</p>
+            <p className="text-xs text-rose-300">{form.formState.errors.password?.message}</p>
           </div>
 
           <Button className="w-full" disabled={isSubmitting} type="submit">
@@ -189,9 +189,9 @@ function SignupForm() {
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="mt-6 text-center text-sm text-slate-400">
           Already have an account?{" "}
-          <Link className="font-medium text-zinc-950 hover:underline dark:text-zinc-50" href="/login">
+          <Link className="font-medium text-slate-100 hover:text-white hover:underline" href="/login">
             Sign in
           </Link>
         </p>

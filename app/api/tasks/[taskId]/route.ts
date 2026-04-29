@@ -41,8 +41,27 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
 
     await connectToDatabase();
 
+    const existingTask = await Task.findOne({
+      _id: taskId,
+      userId: user.userId,
+    });
+
+    if (!existingTask) {
+      return apiError("Task not found.", 404);
+    }
+
+    const nextStatus =
+      parsed.data.status ??
+      (parsed.data.completed === true
+        ? "done"
+        : parsed.data.completed === false && existingTask.status === "done"
+          ? "backlog"
+          : existingTask.status ?? (existingTask.completed ? "done" : "backlog"));
+
     const updateData = {
       ...parsed.data,
+      status: nextStatus,
+      completed: nextStatus === "done" ? true : (parsed.data.completed ?? false),
       dueDate:
         parsed.data.dueDate === undefined
           ? undefined
@@ -52,10 +71,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
     };
 
     const task = await Task.findOneAndUpdate(
-      {
-        _id: taskId,
-        userId: user.userId,
-      },
+      { _id: taskId, userId: user.userId },
       updateData,
       {
         new: true,

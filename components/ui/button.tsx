@@ -7,24 +7,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-zinc-950/20 dark:focus-visible:ring-white/20",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl text-sm font-semibold transition-all disabled:pointer-events-none disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617]",
   {
     variants: {
       variant: {
         default:
-          "bg-zinc-950 text-white shadow-sm hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200",
+          "bg-slate-100 text-slate-950 shadow-[0_18px_36px_-22px_rgba(226,232,240,0.28)] hover:-translate-y-0.5 hover:bg-white",
         secondary:
-          "bg-zinc-100 text-zinc-950 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800",
+          "border border-white/10 bg-slate-900/80 text-slate-200 hover:bg-slate-800 hover:text-white",
         outline:
-          "border border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-zinc-900",
+          "border border-white/10 bg-slate-950/88 text-slate-200 shadow-[0_14px_32px_-24px_rgba(2,6,23,0.95)] backdrop-blur hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-900 hover:text-white",
         ghost:
-          "text-zinc-700 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white",
+          "text-slate-300 hover:bg-slate-900/90 hover:text-white",
         destructive:
-          "bg-red-600 text-white hover:bg-red-500",
+          "bg-[linear-gradient(135deg,#be123c_0%,#ef4444_100%)] text-white shadow-[0_18px_40px_-24px_rgba(239,68,68,0.75)] hover:-translate-y-0.5 hover:brightness-110",
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-lg px-3",
+        sm: "h-9 rounded-xl px-3.5",
         lg: "h-11 px-5",
         icon: "h-10 w-10",
       },

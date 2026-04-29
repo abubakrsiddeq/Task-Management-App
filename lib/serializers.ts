@@ -11,12 +11,17 @@ export function serializeUser(user: UserDocument) {
 }
 
 export function serializeTask(task: TaskDocument) {
+  const status = task.status ?? (task.completed ? "done" : "backlog");
+
   return {
     id: String(task._id),
     title: task.title,
     description: task.description ?? "",
     completed: task.completed,
     priority: task.priority,
+    status,
+    label: task.label ?? "product",
+    assignee: task.assignee ?? "owner",
     dueDate: task.dueDate ? task.dueDate.toISOString() : null,
     order: task.order,
     createdAt: task.createdAt,
