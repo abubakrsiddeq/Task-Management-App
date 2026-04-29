@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import {
-  TASK_ASSIGNEE_OPTIONS,
+
   TASK_BOARD_COLUMNS,
   TASK_LABEL_OPTIONS,
   TASK_PRIORITIES,
@@ -18,10 +18,7 @@ const taskLabels = TASK_LABEL_OPTIONS.map((option) => option.id) as [
   ...(typeof TASK_LABEL_OPTIONS)[number]["id"][],
 ];
 
-const taskAssignees = TASK_ASSIGNEE_OPTIONS.map((option) => option.id) as [
-  (typeof TASK_ASSIGNEE_OPTIONS)[number]["id"],
-  ...(typeof TASK_ASSIGNEE_OPTIONS)[number]["id"][],
-];
+
 
 const taskBaseSchema = z.object({
   title: z
@@ -38,7 +35,7 @@ const taskBaseSchema = z.object({
   priority: z.enum(TASK_PRIORITIES),
   status: z.enum(taskBoardStatuses),
   label: z.enum(taskLabels),
-  assignee: z.enum(taskAssignees),
+
   dueDate: z.string().optional().or(z.literal("")),
   completed: z.boolean().optional(),
   order: z.number().int().optional(),

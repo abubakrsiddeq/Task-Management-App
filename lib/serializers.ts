@@ -21,7 +21,7 @@ export function serializeTask(task: TaskDocument) {
     priority: task.priority,
     status,
     label: task.label ?? "product",
-    assignee: task.assignee ?? "owner",
+
     dueDate: task.dueDate ? task.dueDate.toISOString() : null,
     order: task.order,
     createdAt: task.createdAt,

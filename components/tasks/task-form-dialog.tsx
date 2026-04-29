@@ -19,7 +19,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  TASK_ASSIGNEE_OPTIONS,
   TASK_BOARD_COLUMNS,
   TASK_LABEL_OPTIONS,
 } from "@/lib/constants";
@@ -59,7 +58,7 @@ export function TaskFormDialog({
       priority: "medium",
       status: defaultStatus,
       label: "product",
-      assignee: "owner",
+
       dueDate: "",
       completed: false,
     },
@@ -72,7 +71,7 @@ export function TaskFormDialog({
       priority: initialTask?.priority ?? "medium",
       status: initialTask?.status ?? defaultStatus,
       label: initialTask?.label ?? "product",
-      assignee: initialTask?.assignee ?? "owner",
+
       dueDate: initialTask?.dueDate
         ? new Date(initialTask.dueDate).toISOString().slice(0, 10)
         : "",
@@ -87,8 +86,8 @@ export function TaskFormDialog({
           <DialogTitle>{initialTask ? "Edit task" : "Create a new task"}</DialogTitle>
           <DialogDescription>
             {initialTask
-              ? "Update task details, due dates, and collaborators without leaving the board."
-              : "Add a focused task with a label, assignee, and checklist so the board stays easy to scan."}
+              ? "Update task details, due dates, and priorities without leaving the board."
+              : "Add a focused task with a label and priority so the board stays easy to scan."}
           </DialogDescription>
         </DialogHeader>
 
@@ -143,16 +142,7 @@ export function TaskFormDialog({
               </select>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="assignee">Assignee</Label>
-              <select className={fieldClassName} id="assignee" {...form.register("assignee")}>
-                {TASK_ASSIGNEE_OPTIONS.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.id === "owner" ? `${ownerName} (You)` : option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+
           </div>
 
           <div className="space-y-2">

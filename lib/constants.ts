@@ -34,8 +34,5 @@ export const TASK_LABEL_OPTIONS = [
   { id: "product", label: "Product" },
 ] as const;
 
-export const TASK_ASSIGNEE_OPTIONS = [
-  { id: "owner", label: "Workspace Owner" },
-] as const;
 
 export const TASK_STATUS_FILTERS = ["all", "pending", "completed"] as const;

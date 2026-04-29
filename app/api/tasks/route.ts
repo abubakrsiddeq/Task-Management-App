@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
       completed,
       status: parsed.data.status,
       label: parsed.data.label,
-      assignee: parsed.data.assignee,
+
       dueDate,
       order: parsed.data.order ?? Date.now(),
     });

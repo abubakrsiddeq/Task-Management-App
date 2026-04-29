@@ -35,14 +35,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-  TASK_ASSIGNEE_OPTIONS,
   TASK_BOARD_COLUMNS,
 } from "@/lib/constants";
 import { cn, formatDate, getInitials, isOverdue } from "@/lib/utils";
 import {
   type Priority,
   type SessionUser,
-  type TaskAssignee,
+
   type TaskBoardStatus,
   type TaskItem,
   type TaskLabel,
@@ -58,7 +57,7 @@ type TaskPayload = {
   priority: Priority;
   status: TaskBoardStatus;
   label: TaskLabel;
-  assignee: TaskAssignee;
+
   dueDate?: string;
   completed?: boolean;
   order?: number;
